@@ -9,6 +9,8 @@ interface CharacterProps {
   color: string;
 }
 
+
+
 export default function Character({ playerId, position, color }: CharacterProps) {
   const meshRef = useRef<THREE.Group>(null);
   const { fighters, hitEffects } = useFighting();
@@ -78,26 +80,12 @@ export default function Character({ playerId, position, color }: CharacterProps)
       </mesh>
       
       {/* Arms */}
-      <mesh 
-        castShadow 
-        position={[
-          -0.6 + (fighter.isAttacking ? Math.sin(time * 25) * 0.2 : 0), 
-          1.4, 
-          fighter.isAttacking ? Math.sin(time * 25) * 0.3 : 0
-        ]}
-      >
+      <mesh castShadow position={[-0.6, 1.4, 0]}>
         <boxGeometry args={[0.3, 1, 0.3]} />
         <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
       </mesh>
       
-      <mesh 
-        castShadow 
-        position={[
-          0.6 + (fighter.isAttacking ? Math.sin(time * 20) * 0.2 : 0), 
-          1.4, 
-          fighter.isAttacking ? Math.sin(time * 20) * 0.3 : 0
-        ]}
-      >
+      <mesh castShadow position={[0.6, 1.4, 0]}>
         <boxGeometry args={[0.3, 1, 0.3]} />
         <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
       </mesh>
