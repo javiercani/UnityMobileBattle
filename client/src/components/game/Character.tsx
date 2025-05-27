@@ -117,59 +117,59 @@ export default function Character({ playerId, position, color }: CharacterProps)
   // Get fighter appearance based on selected character
   const getCharacterAppearance = () => {
     switch (fighter?.characterId) {
-      case 'ryu':
+      case 'giovanni':
         return {
-          bodyColor: '#FFFFFF',
+          bodyColor: '#FF6B47', // Pizza red shirt
           skinColor: '#FDBCB4',
-          pantsColor: '#E2E8F0',
-          beltColor: '#000000',
-          headband: true,
+          pantsColor: '#FFFFFF', // White chef pants
+          beltColor: '#8B4513', // Brown leather belt
+          headband: true, // Chef hat
           gloves: false
         };
-      case 'chun':
+      case 'sofia':
         return {
-          bodyColor: '#0066CC',
+          bodyColor: '#FFB3E6', // Pink gelato outfit
           skinColor: '#F7D794',
-          pantsColor: '#1A202C',
-          beltColor: '#FFD700',
+          pantsColor: '#E6E6FA', // Lavender pants
+          beltColor: '#FFD700', // Golden sash
           headband: false,
-          gloves: true
+          gloves: true // Ice cream serving gloves
         };
-      case 'ken':
+      case 'marco':
         return {
-          bodyColor: '#FF4444',
+          bodyColor: '#8B4513', // Coffee brown vest
           skinColor: '#FDBCB4',
-          pantsColor: '#FFD700',
-          beltColor: '#8B4513',
-          headband: false,
-          gloves: true
-        };
-      case 'blanka':
-        return {
-          bodyColor: '#00FF00',
-          skinColor: '#228B22',
-          pantsColor: '#FF8C00',
-          beltColor: '#654321',
+          pantsColor: '#2F4F4F', // Dark slate pants
+          beltColor: '#000000', // Black belt
           headband: false,
           gloves: false
         };
-      case 'zangief':
+      case 'lucia':
         return {
-          bodyColor: '#FF6B6B',
+          bodyColor: '#FFD700', // Golden pasta chef outfit
+          skinColor: '#FDBCB4',
+          pantsColor: '#228B22', // Italian green pants
+          beltColor: '#DC143C', // Red italian belt
+          headband: true, // Pasta chef hat
+          gloves: true // Cooking gloves
+        };
+      case 'antonio':
+        return {
+          bodyColor: '#0066CC', // Blue gondolier shirt
           skinColor: '#DEB887',
-          pantsColor: '#8B0000',
-          beltColor: '#FFD700',
-          headband: true,
+          pantsColor: '#FFFFFF', // White sailor pants
+          beltColor: '#FFD700', // Golden sash
+          headband: true, // Gondolier hat
           gloves: false
         };
-      case 'dhalsim':
+      case 'francesca':
         return {
-          bodyColor: '#FF8800',
-          skinColor: '#D2691E',
-          pantsColor: '#FFFFFF',
-          beltColor: '#800080',
-          headband: true,
-          gloves: false
+          bodyColor: '#8B0000', // Deep red opera dress
+          skinColor: '#F5DEB3',
+          pantsColor: '#4B0082', // Indigo opera skirt
+          beltColor: '#FFD700', // Golden opera belt
+          headband: false,
+          gloves: true // Elegant opera gloves
         };
       default:
         return {
@@ -254,48 +254,90 @@ export default function Character({ playerId, position, color }: CharacterProps)
       </mesh>
       
       {/* Character-specific special features */}
-      {fighter?.characterId === 'blanka' && (
-        // Blanka's wild hair spikes
+      {fighter?.characterId === 'giovanni' && (
+        // Giovanni's chef mustache and pizza flour
         <>
-          <mesh castShadow position={[-0.2, 2.6, 0]}>
-            <boxGeometry args={[0.1, 0.3, 0.1]} />
-            <meshLambertMaterial color="#32CD32" />
-          </mesh>
-          <mesh castShadow position={[0, 2.7, 0]}>
-            <boxGeometry args={[0.1, 0.4, 0.1]} />
-            <meshLambertMaterial color="#32CD32" />
-          </mesh>
-          <mesh castShadow position={[0.2, 2.6, 0]}>
-            <boxGeometry args={[0.1, 0.3, 0.1]} />
-            <meshLambertMaterial color="#32CD32" />
-          </mesh>
-        </>
-      )}
-      
-      {fighter?.characterId === 'zangief' && (
-        // Zangief's chest hair and scars
-        <>
-          <mesh castShadow position={[0, 1.3, 0.31]}>
-            <boxGeometry args={[0.2, 0.4, 0.05]} />
+          <mesh castShadow position={[0, 2.1, 0.31]}>
+            <boxGeometry args={[0.3, 0.05, 0.05]} />
             <meshLambertMaterial color="#8B4513" />
           </mesh>
-          <mesh castShadow position={[0.1, 1.5, 0.31]}>
-            <boxGeometry args={[0.6, 0.05, 0.05]} />
-            <meshLambertMaterial color="#FFB6C1" />
+          <mesh castShadow position={[0.1, 1.3, 0.31]}>
+            <boxGeometry args={[0.2, 0.2, 0.05]} />
+            <meshLambertMaterial color="#FFFFFF" />
           </mesh>
         </>
       )}
       
-      {fighter?.characterId === 'dhalsim' && (
-        // Dhalsim's jewelry and skull necklace
+      {fighter?.characterId === 'sofia' && (
+        // Sofia's gelato cone accessories
         <>
-          <mesh castShadow position={[0, 1.8, 0]}>
-            <cylinderGeometry args={[0.35, 0.35, 0.05]} />
+          <mesh castShadow position={[-0.2, 2.6, 0]}>
+            <coneGeometry args={[0.05, 0.2]} />
+            <meshLambertMaterial color="#DEB887" />
+          </mesh>
+          <mesh castShadow position={[0.2, 2.6, 0]}>
+            <sphereGeometry args={[0.08]} />
+            <meshLambertMaterial color="#FFB3E6" />
+          </mesh>
+        </>
+      )}
+      
+      {fighter?.characterId === 'marco' && (
+        // Marco's coffee bean accessories and steam
+        <>
+          <mesh castShadow position={[0, 1.6, 0.31]}>
+            <sphereGeometry args={[0.05]} />
+            <meshLambertMaterial color="#8B4513" />
+          </mesh>
+          <mesh castShadow position={[0.1, 2.6, 0]}>
+            <boxGeometry args={[0.05, 0.2, 0.05]} />
+            <meshLambertMaterial color="#F5F5F5" />
+          </mesh>
+        </>
+      )}
+      
+      {fighter?.characterId === 'lucia' && (
+        // Lucia's pasta noodles as hair accessories
+        <>
+          <mesh castShadow position={[-0.2, 2.6, 0]}>
+            <cylinderGeometry args={[0.02, 0.02, 0.3]} />
             <meshLambertMaterial color="#FFD700" />
           </mesh>
-          <mesh castShadow position={[0, 1.6, 0.31]}>
+          <mesh castShadow position={[0.2, 2.6, 0]}>
+            <cylinderGeometry args={[0.02, 0.02, 0.3]} />
+            <meshLambertMaterial color="#FFD700" />
+          </mesh>
+        </>
+      )}
+      
+      {fighter?.characterId === 'antonio' && (
+        // Antonio's gondolier pole and Venetian mask
+        <>
+          <mesh castShadow position={[0.4, 1.8, 0]}>
+            <cylinderGeometry args={[0.03, 0.03, 1.5]} />
+            <meshLambertMaterial color="#8B4513" />
+          </mesh>
+          <mesh castShadow position={[0, 2.1, 0.31]}>
+            <boxGeometry args={[0.4, 0.2, 0.05]} />
+            <meshLambertMaterial color="#FFD700" />
+          </mesh>
+        </>
+      )}
+      
+      {fighter?.characterId === 'francesca' && (
+        // Francesca's opera earrings and musical notes
+        <>
+          <mesh castShadow position={[-0.35, 2.2, 0]}>
+            <sphereGeometry args={[0.05]} />
+            <meshLambertMaterial color="#FFD700" />
+          </mesh>
+          <mesh castShadow position={[0.35, 2.2, 0]}>
+            <sphereGeometry args={[0.05]} />
+            <meshLambertMaterial color="#FFD700" />
+          </mesh>
+          <mesh castShadow position={[0, 2.6, 0]}>
             <boxGeometry args={[0.1, 0.1, 0.05]} />
-            <meshLambertMaterial color="#FFFFFF" />
+            <meshLambertMaterial color="#8B0000" />
           </mesh>
         </>
       )}

@@ -15,88 +15,88 @@ export interface FighterData {
 }
 
 export const fighters: Record<string, FighterData> = {
-  ryu: {
-    name: "Ryu",
-    style: "Karate Master",
-    emoji: "🥋",
-    color: "#FFFFFF",
+  giovanni: {
+    name: "Giovanni",
+    style: "Maestro Pizzaiolo",
+    emoji: "🍕",
+    color: "#FF6B47",
     stats: {
       speed: 7,
       power: 8,
       defense: 7,
       energy: 100
     },
-    specialMoves: ["Hadoken", "Shoryuken", "Tatsumaki"]
+    specialMoves: ["Pizza Slice", "Dough Spin", "Marinara Splash"]
   },
   
-  chun: {
-    name: "Chun-Li",
-    style: "Lightning Legs",
-    emoji: "⚡",
-    color: "#0066CC",
+  sofia: {
+    name: "Sofia",
+    style: "Gelato Warrior",
+    emoji: "🍨",
+    color: "#FFB3E6",
     stats: {
       speed: 9,
       power: 6,
       defense: 6,
       energy: 100
     },
-    specialMoves: ["Lightning Legs", "Spinning Bird Kick", "Kikoken"]
+    specialMoves: ["Ice Cream Freeze", "Gelato Whip", "Vanilla Strike"]
   },
   
-  ken: {
-    name: "Ken",
-    style: "Flame Fighter",
-    emoji: "🔥",
-    color: "#FFD700",
+  marco: {
+    name: "Marco",
+    style: "Espresso Fighter",
+    emoji: "☕",
+    color: "#8B4513",
     stats: {
       speed: 8,
       power: 7,
       defense: 6,
       energy: 100
     },
-    specialMoves: ["Fire Shoryuken", "Hurricane Kick", "Fire Hadoken"]
+    specialMoves: ["Caffeine Rush", "Steam Shot", "Crema Blast"]
   },
   
-  blanka: {
-    name: "Blanka",
-    style: "Electric Beast",
-    emoji: "⚡",
-    color: "#00FF00",
+  lucia: {
+    name: "Lucia",
+    style: "Pasta Master",
+    emoji: "🍝",
+    color: "#FFD700",
     stats: {
       speed: 6,
       power: 9,
       defense: 8,
       energy: 100
     },
-    specialMoves: ["Electric Thunder", "Rolling Attack", "Beast Roll"]
+    specialMoves: ["Spaghetti Whip", "Linguine Lasso", "Carbonara Bomb"]
   },
   
-  zangief: {
-    name: "Zangief",
-    style: "Grappler",
-    emoji: "💪",
-    color: "#FF4444",
+  antonio: {
+    name: "Antonio",
+    style: "Gondoliere",
+    emoji: "🚣",
+    color: "#0066CC",
     stats: {
       speed: 4,
       power: 10,
       defense: 9,
       energy: 100
     },
-    specialMoves: ["Screw Piledriver", "Lariat", "Bear Hug"]
+    specialMoves: ["Oar Slam", "Venetian Rush", "Canal Splash"]
   },
   
-  dhalsim: {
-    name: "Dhalsim",
-    style: "Yoga Master",
-    emoji: "🧘",
-    color: "#FF8800",
+  francesca: {
+    name: "Francesca",
+    style: "Opera Singer",
+    emoji: "🎭",
+    color: "#8B0000",
     stats: {
       speed: 5,
       power: 7,
       defense: 5,
       energy: 100
     },
-    specialMoves: ["Yoga Fire", "Yoga Teleport", "Stretch Punch"]
+    specialMoves: ["Sonic Aria", "High Note", "Drama Strike"]
   }
 };
 

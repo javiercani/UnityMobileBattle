@@ -31,13 +31,13 @@ export default function MainMenu() {
         {/* Main Title */}
         <div className="space-y-4">
           <h1 className="text-6xl md:text-8xl font-bold text-white drop-shadow-lg">
-            STREET CLASH
+            BRAINROOT
           </h1>
           <h2 className="text-2xl md:text-4xl font-bold text-yellow-400 drop-shadow-lg">
-            BATTLEGROUND
+            ITALIAN FIGHTERS
           </h2>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-            Enter the arena and prove your fighting skills in this epic 3D battle game!
+            ¡Únete a la batalla más deliciosa de Italia! Lucha con personajes únicos inspirados en la cultura italiana.
           </p>
         </div>
 
