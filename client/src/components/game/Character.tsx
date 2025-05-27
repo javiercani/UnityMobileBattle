@@ -114,45 +114,191 @@ export default function Character({ playerId, position, color }: CharacterProps)
     meshRef.current.position.y = fighter.position.y + bobOffset;
   });
 
+  // Get fighter appearance based on selected character
+  const getCharacterAppearance = () => {
+    switch (fighter?.characterId) {
+      case 'ryu':
+        return {
+          bodyColor: '#FFFFFF',
+          skinColor: '#FDBCB4',
+          pantsColor: '#E2E8F0',
+          beltColor: '#000000',
+          headband: true,
+          gloves: false
+        };
+      case 'chun':
+        return {
+          bodyColor: '#0066CC',
+          skinColor: '#F7D794',
+          pantsColor: '#1A202C',
+          beltColor: '#FFD700',
+          headband: false,
+          gloves: true
+        };
+      case 'ken':
+        return {
+          bodyColor: '#FF4444',
+          skinColor: '#FDBCB4',
+          pantsColor: '#FFD700',
+          beltColor: '#8B4513',
+          headband: false,
+          gloves: true
+        };
+      case 'blanka':
+        return {
+          bodyColor: '#00FF00',
+          skinColor: '#228B22',
+          pantsColor: '#FF8C00',
+          beltColor: '#654321',
+          headband: false,
+          gloves: false
+        };
+      case 'zangief':
+        return {
+          bodyColor: '#FF6B6B',
+          skinColor: '#DEB887',
+          pantsColor: '#8B0000',
+          beltColor: '#FFD700',
+          headband: true,
+          gloves: false
+        };
+      case 'dhalsim':
+        return {
+          bodyColor: '#FF8800',
+          skinColor: '#D2691E',
+          pantsColor: '#FFFFFF',
+          beltColor: '#800080',
+          headband: true,
+          gloves: false
+        };
+      default:
+        return {
+          bodyColor: '#FF6B6B',
+          skinColor: '#FDBCB4',
+          pantsColor: '#4A5568',
+          beltColor: '#000000',
+          headband: false,
+          gloves: false
+        };
+    }
+  };
+
+  const appearance = getCharacterAppearance();
+
   return (
     <group ref={meshRef} position={position}>
-      {/* Main body */}
+      {/* Main body with character-specific color */}
       <mesh castShadow position={[0, 1, 0]}>
         <boxGeometry args={[0.8, 1.6, 0.6]} />
         <meshLambertMaterial 
-          color={hitEffect.active ? "#FF6B6B" : color}
+          color={hitEffect.active ? "#FF6B6B" : appearance.bodyColor}
           transparent={hitEffect.active}
           opacity={hitEffect.active ? 0.7 : 1}
         />
       </mesh>
       
-      {/* Head */}
+      {/* Head with character-specific skin color */}
       <mesh castShadow position={[0, 2.2, 0]}>
         <boxGeometry args={[0.6, 0.6, 0.6]} />
-        <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
+        <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : appearance.skinColor} />
       </mesh>
       
-      {/* Arms - now with individual references for natural movement */}
+      {/* Character-specific headband (if applicable) */}
+      {appearance.headband && (
+        <mesh castShadow position={[0, 2.4, 0]}>
+          <boxGeometry args={[0.7, 0.1, 0.7]} />
+          <meshLambertMaterial color={appearance.beltColor} />
+        </mesh>
+      )}
+      
+      {/* Arms with character-specific skin color and optional gloves */}
       <mesh ref={leftArmRef} castShadow position={[-0.6, 1.4, 0]}>
         <boxGeometry args={[0.3, 1, 0.3]} />
-        <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
+        <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : appearance.skinColor} />
       </mesh>
       
       <mesh ref={rightArmRef} castShadow position={[0.6, 1.4, 0]}>
         <boxGeometry args={[0.3, 1, 0.3]} />
-        <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
+        <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : appearance.skinColor} />
       </mesh>
       
-      {/* Legs - now with individual references for natural movement */}
+      {/* Character-specific gloves (if applicable) */}
+      {appearance.gloves && (
+        <>
+          <mesh castShadow position={[-0.6, 0.8, 0]}>
+            <boxGeometry args={[0.35, 0.4, 0.35]} />
+            <meshLambertMaterial color={appearance.bodyColor} />
+          </mesh>
+          <mesh castShadow position={[0.6, 0.8, 0]}>
+            <boxGeometry args={[0.35, 0.4, 0.35]} />
+            <meshLambertMaterial color={appearance.bodyColor} />
+          </mesh>
+        </>
+      )}
+      
+      {/* Legs with character-specific pants color */}
       <mesh ref={leftLegRef} castShadow position={[-0.25, -0.2, 0]}>
         <boxGeometry args={[0.3, 1.2, 0.4]} />
-        <meshLambertMaterial color="#4A5568" />
+        <meshLambertMaterial color={appearance.pantsColor} />
       </mesh>
       
       <mesh ref={rightLegRef} castShadow position={[0.25, -0.2, 0]}>
         <boxGeometry args={[0.3, 1.2, 0.4]} />
-        <meshLambertMaterial color="#4A5568" />
+        <meshLambertMaterial color={appearance.pantsColor} />
       </mesh>
+      
+      {/* Character belt */}
+      <mesh castShadow position={[0, 0.4, 0]}>
+        <boxGeometry args={[0.9, 0.2, 0.7]} />
+        <meshLambertMaterial color={appearance.beltColor} />
+      </mesh>
+      
+      {/* Character-specific special features */}
+      {fighter?.characterId === 'blanka' && (
+        // Blanka's wild hair spikes
+        <>
+          <mesh castShadow position={[-0.2, 2.6, 0]}>
+            <boxGeometry args={[0.1, 0.3, 0.1]} />
+            <meshLambertMaterial color="#32CD32" />
+          </mesh>
+          <mesh castShadow position={[0, 2.7, 0]}>
+            <boxGeometry args={[0.1, 0.4, 0.1]} />
+            <meshLambertMaterial color="#32CD32" />
+          </mesh>
+          <mesh castShadow position={[0.2, 2.6, 0]}>
+            <boxGeometry args={[0.1, 0.3, 0.1]} />
+            <meshLambertMaterial color="#32CD32" />
+          </mesh>
+        </>
+      )}
+      
+      {fighter?.characterId === 'zangief' && (
+        // Zangief's chest hair and scars
+        <>
+          <mesh castShadow position={[0, 1.3, 0.31]}>
+            <boxGeometry args={[0.2, 0.4, 0.05]} />
+            <meshLambertMaterial color="#8B4513" />
+          </mesh>
+          <mesh castShadow position={[0.1, 1.5, 0.31]}>
+            <boxGeometry args={[0.6, 0.05, 0.05]} />
+            <meshLambertMaterial color="#FFB6C1" />
+          </mesh>
+        </>
+      )}
+      
+      {fighter?.characterId === 'dhalsim' && (
+        // Dhalsim's jewelry and skull necklace
+        <>
+          <mesh castShadow position={[0, 1.8, 0]}>
+            <cylinderGeometry args={[0.35, 0.35, 0.05]} />
+            <meshLambertMaterial color="#FFD700" />
+          </mesh>
+          <mesh castShadow position={[0, 1.6, 0.31]}>
+            <boxGeometry args={[0.1, 0.1, 0.05]} />
+            <meshLambertMaterial color="#FFFFFF" />
+          </mesh>
+        </>
+      )}
       
       {/* Hit effect particles */}
       {hitEffect.active && (
