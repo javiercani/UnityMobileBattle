@@ -13,6 +13,10 @@ interface CharacterProps {
 
 export default function Character({ playerId, position, color }: CharacterProps) {
   const meshRef = useRef<THREE.Group>(null);
+  const leftArmRef = useRef<THREE.Mesh>(null);
+  const rightArmRef = useRef<THREE.Mesh>(null);
+  const leftLegRef = useRef<THREE.Mesh>(null);
+  const rightLegRef = useRef<THREE.Mesh>(null);
   const { fighters, hitEffects } = useFighting();
   
   const fighter = fighters[playerId];
@@ -46,16 +50,65 @@ export default function Character({ playerId, position, color }: CharacterProps)
       
       // Add slight forward lean during attack
       meshRef.current.rotation.z = Math.sin(time * 30) * 0.05;
+      
+      // Animate arms during attack
+      if (leftArmRef.current && rightArmRef.current) {
+        // Alternating punching motion
+        leftArmRef.current.position.z = Math.sin(time * 30) * 0.4;
+        rightArmRef.current.position.z = Math.sin(time * 30 + Math.PI) * 0.4;
+        leftArmRef.current.rotation.x = Math.sin(time * 30) * 0.3;
+        rightArmRef.current.rotation.x = Math.sin(time * 30 + Math.PI) * 0.3;
+      }
+      
+      // Animate legs during kicks
+      if (leftLegRef.current && rightLegRef.current) {
+        leftLegRef.current.position.z = Math.sin(time * 20) * 0.2;
+        rightLegRef.current.position.z = Math.sin(time * 20 + Math.PI) * 0.2;
+        leftLegRef.current.rotation.x = Math.sin(time * 20) * 0.2;
+        rightLegRef.current.rotation.x = Math.sin(time * 20 + Math.PI) * 0.2;
+      }
     } else if (fighter.isMoving) {
-      // Walking animation - subtle bob
+      // Walking animation - subtle bob and natural limb movement
       bobOffset = Math.sin(time * 8) * 0.05;
       meshRef.current.rotation.x = 0;
       meshRef.current.rotation.z = 0;
+      
+      // Walking arm swing
+      if (leftArmRef.current && rightArmRef.current) {
+        leftArmRef.current.rotation.x = Math.sin(time * 8) * 0.3;
+        rightArmRef.current.rotation.x = Math.sin(time * 8 + Math.PI) * 0.3;
+        leftArmRef.current.position.z = 0;
+        rightArmRef.current.position.z = 0;
+      }
+      
+      // Walking leg movement
+      if (leftLegRef.current && rightLegRef.current) {
+        leftLegRef.current.rotation.x = Math.sin(time * 8 + Math.PI) * 0.2;
+        rightLegRef.current.rotation.x = Math.sin(time * 8) * 0.2;
+        leftLegRef.current.position.z = 0;
+        rightLegRef.current.position.z = 0;
+      }
     } else {
-      // Idle animation - gentle sway
+      // Idle animation - gentle sway and breathing
       bobOffset = Math.sin(time * 2) * 0.02;
       meshRef.current.rotation.x = 0;
       meshRef.current.rotation.z = 0;
+      
+      // Idle arm sway
+      if (leftArmRef.current && rightArmRef.current) {
+        leftArmRef.current.rotation.x = Math.sin(time * 2) * 0.05;
+        rightArmRef.current.rotation.x = Math.sin(time * 2.5) * 0.05;
+        leftArmRef.current.position.z = 0;
+        rightArmRef.current.position.z = 0;
+      }
+      
+      // Reset legs to neutral
+      if (leftLegRef.current && rightLegRef.current) {
+        leftLegRef.current.rotation.x = 0;
+        rightLegRef.current.rotation.x = 0;
+        leftLegRef.current.position.z = 0;
+        rightLegRef.current.position.z = 0;
+      }
     }
     
     meshRef.current.position.y = fighter.position.y + bobOffset;
@@ -79,24 +132,24 @@ export default function Character({ playerId, position, color }: CharacterProps)
         <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
       </mesh>
       
-      {/* Arms */}
-      <mesh castShadow position={[-0.6, 1.4, 0]}>
+      {/* Arms - now with individual references for natural movement */}
+      <mesh ref={leftArmRef} castShadow position={[-0.6, 1.4, 0]}>
         <boxGeometry args={[0.3, 1, 0.3]} />
         <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
       </mesh>
       
-      <mesh castShadow position={[0.6, 1.4, 0]}>
+      <mesh ref={rightArmRef} castShadow position={[0.6, 1.4, 0]}>
         <boxGeometry args={[0.3, 1, 0.3]} />
         <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
       </mesh>
       
-      {/* Legs */}
-      <mesh castShadow position={[-0.25, -0.2, 0]}>
+      {/* Legs - now with individual references for natural movement */}
+      <mesh ref={leftLegRef} castShadow position={[-0.25, -0.2, 0]}>
         <boxGeometry args={[0.3, 1.2, 0.4]} />
         <meshLambertMaterial color="#4A5568" />
       </mesh>
       
-      <mesh castShadow position={[0.25, -0.2, 0]}>
+      <mesh ref={rightLegRef} castShadow position={[0.25, -0.2, 0]}>
         <boxGeometry args={[0.3, 1.2, 0.4]} />
         <meshLambertMaterial color="#4A5568" />
       </mesh>
