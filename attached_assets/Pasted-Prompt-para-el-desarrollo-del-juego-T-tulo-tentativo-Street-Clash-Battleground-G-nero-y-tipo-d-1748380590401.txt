@@ -1,0 +1,57 @@
+Prompt para el desarrollo del juego
+Título tentativo: Street Clash: Battleground
+
+Género y tipo de juego:
+Un juego de lucha arcade para móviles con partidas rápidas (3-5 minutos) y mecánicas accesibles pero estratégicas. Los jugadores eligen entre múltiples personajes con habilidades únicas, y cada ataque consume energía del oponente, requiriendo gestión táctica de recursos. Aunque es sencillo, permite desbloquear nuevos personajes mediante progresión o compras cosméticas.
+
+Público objetivo:
+Niños y adolescentes (6-16 años). Diseño colorido y vibrante con estilo visual inspirado en Street Fighter (combos dinámicos, efectos visuales llamativos) pero adaptado a un formato 3D low-poly para optimizar rendimiento. Contenido familiar y sin temáticas adultas.
+
+Tema y narrativa:
+Universo ficticio de combate callejero donde luchadores de diferentes culturas y estilos se enfrentan en torneos globales. Cada personaje tiene una historia breve y personalidad única, pero la narrativa es secundaria al gameplay.
+
+Mecánicas principales:
+
+Controles táctiles:
+Desplazamiento horizontal (adelante/atrás) con joystick virtual.
+Cuatro botones en pantalla para ataques: puño alto, puño bajo, patada alta y patada baja.
+Gestión de energía: Cada ataque reduce la barra de energía del oponente; combos exitosos aceleran el drenaje.
+Combos y azar: Equilibrio entre habilidad (ejecutar secuencias precisas) y suerte (elementos aleatorios en la resistencia del rival).
+Modos de juego:
+Multijugador en tiempo real online (1v1 o 2v2).
+Modo offline contra IA para practicar.
+Eventos competitivos con clasificación global.
+Monetización:
+
+Gratis con anuncios intersticiales y rewarded (ej: ver un anuncio para revivir después de perder).
+IAPs:
+Desbloqueo de personajes exclusivos (solo cosméticos, sin ventajas competitivas).
+Paquetes de skins, efectos de golpe y emotes.
+Suscripción mensual: Recompensas exclusivas (ej: oro extra, acceso anticipado a personajes).
+Pase de batalla: Temporadas temáticas con desafíos y recompensas progresivas (gratuito y premium).
+Características sociales:
+
+Rankings globales y por amigos.
+Clanes: Unirse o crear clanes para competir en torneos semanales.
+Compartir logros: Integración con redes sociales para compartir victorias o combos épicos.
+Estilo visual y sonoro:
+
+Arte 3D low-poly: Personajes estilizados con colores vivos, escenarios dinámicos (ej: plazas urbanas, techos de edificios).
+Animaciones minimalistas pero fluidas: Enfocado en claridad durante los combates.
+Música y sonido: Bandas sonoras épicas con efectos de impacto exagerados (ej: explosiones de energía, gritos de victoria).
+Plataforma y tecnología:
+
+Multiplataforma: iOS y Android.
+Motor recomendado: Unity (por soporte multiplataforma, física de combate y red de activos) o Godot (opción ligera y open-source).
+Conexión: Modo offline para jugar contra IA; online requerido para multijugador y eventos.
+Diferenciación (USP):
+
+Mezcla de la profundidad táctica de los juegos de lucha clásicos (ej: Street Fighter ) con la accesibilidad de partidas rápidas.
+Sistema de energía que premia la agresividad estratégica, no solo la velocidad.
+Comunidad activa con clanes y pases de batalla temáticos (ej: colaboraciones con franquicias de anime o cómics).
+Inspiraciones clave:
+
+Street Fighter (controles táctiles y combos).
+Dragon Ball FighterZ (estilo visual y efectos dramáticos).
+Stumble Guys (competencia rápida y rankings sociales).
+Roblox (personalización de personajes y comunidad).
