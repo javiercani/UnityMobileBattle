@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useFighting } from "../../lib/stores/useFighting";
 import { useAudio } from "../../lib/stores/useAudio";
 import { Button } from "./button";
@@ -18,7 +19,7 @@ export default function ResultScreen() {
   const loserFighter = winner ? fighters[winner === 1 ? 2 : 1] : null;
 
   // Play victory sound
-  React.useEffect(() => {
+  useEffect(() => {
     if (winner) {
       playSuccess();
     }
@@ -61,7 +62,7 @@ export default function ResultScreen() {
                   {winnerFighter?.name} WINS!
                 </h2>
                 <p className="text-lg text-gray-300">
-                  Fighting Style: {winnerFighter?.style}
+                  Fighting Style: {winnerFighter?.characterId}
                 </p>
               </div>
             </>

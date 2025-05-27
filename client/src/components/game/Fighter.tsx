@@ -52,8 +52,8 @@ export default function Fighter({ playerId, isAI = false }: FighterProps) {
       const playerControls = playerId === 1 ? player1Controls : player2Controls;
 
       // Movement
-      if (controls[playerControls.left]) movement.x -= 1;
-      if (controls[playerControls.right]) movement.x += 1;
+      if (controls[playerControls.leftward]) movement.x -= 1;
+      if (controls[playerControls.rightward]) movement.x += 1;
       if (controls[playerControls.forward]) movement.z -= 1;
       if (controls[playerControls.backward]) movement.z += 1;
 
