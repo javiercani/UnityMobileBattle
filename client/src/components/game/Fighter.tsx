@@ -92,13 +92,35 @@ export default function Fighter({ playerId, isAI = false }: FighterProps) {
     if (shouldAttack && !fighter.isAttacking) {
       performAttack(playerId, attackType);
       
+      // Add forward movement during attack
+      const attackDirection = opponent.position.x > fighter.position.x ? 1 : -1;
+      let attackMovement = 0;
+      
+      // Different attack types move different distances
+      switch (attackType) {
+        case 'punchHigh':
+        case 'punchLow':
+          attackMovement = attackDirection * 0.3; // Small forward movement for punches
+          break;
+        case 'kickHigh':
+        case 'kickLow':
+          attackMovement = attackDirection * 0.5; // Larger movement for kicks
+          break;
+        default:
+          attackMovement = attackDirection * 0.2;
+      }
+      
+      // Apply attack movement with boundary checking
+      const newX = Math.max(-9, Math.min(9, fighter.position.x + attackMovement));
+      updateFighterPosition(playerId, newX, fighter.position.y, fighter.position.z, false);
+      
       // Check if attack hits opponent
       const distance = Math.sqrt(
         Math.pow(fighter.position.x - opponent.position.x, 2) +
         Math.pow(fighter.position.z - opponent.position.z, 2)
       );
       
-      if (distance < 2) {
+      if (distance < 2.5) { // Slightly increased range due to movement
         checkCollision(playerId, playerId === 1 ? 2 : 1);
       }
     }

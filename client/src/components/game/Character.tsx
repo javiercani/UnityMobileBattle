@@ -38,16 +38,22 @@ export default function Character({ playerId, position, color }: CharacterProps)
     let bobOffset = 0;
     
     if (fighter.isAttacking) {
-      // Attack animation - lean forward
-      meshRef.current.rotation.x = Math.sin(time * 20) * 0.1;
-      bobOffset = Math.sin(time * 15) * 0.1;
+      // Attack animation - lean forward and slightly up
+      meshRef.current.rotation.x = Math.sin(time * 25) * 0.15;
+      bobOffset = Math.sin(time * 20) * 0.15;
+      
+      // Add slight forward lean during attack
+      meshRef.current.rotation.z = Math.sin(time * 30) * 0.05;
     } else if (fighter.isMoving) {
       // Walking animation - subtle bob
       bobOffset = Math.sin(time * 8) * 0.05;
+      meshRef.current.rotation.x = 0;
+      meshRef.current.rotation.z = 0;
     } else {
       // Idle animation - gentle sway
       bobOffset = Math.sin(time * 2) * 0.02;
       meshRef.current.rotation.x = 0;
+      meshRef.current.rotation.z = 0;
     }
     
     meshRef.current.position.y = fighter.position.y + bobOffset;
@@ -72,12 +78,26 @@ export default function Character({ playerId, position, color }: CharacterProps)
       </mesh>
       
       {/* Arms */}
-      <mesh castShadow position={[-0.6, 1.4, 0]}>
+      <mesh 
+        castShadow 
+        position={[
+          -0.6 + (fighter.isAttacking ? Math.sin(state.clock.elapsedTime * 25) * 0.2 : 0), 
+          1.4, 
+          fighter.isAttacking ? Math.sin(state.clock.elapsedTime * 25) * 0.3 : 0
+        ]}
+      >
         <boxGeometry args={[0.3, 1, 0.3]} />
         <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
       </mesh>
       
-      <mesh castShadow position={[0.6, 1.4, 0]}>
+      <mesh 
+        castShadow 
+        position={[
+          0.6 + (fighter.isAttacking ? Math.sin(state.clock.elapsedTime * 20) * 0.2 : 0), 
+          1.4, 
+          fighter.isAttacking ? Math.sin(state.clock.elapsedTime * 20) * 0.3 : 0
+        ]}
+      >
         <boxGeometry args={[0.3, 1, 0.3]} />
         <meshLambertMaterial color={hitEffect.active ? "#FF6B6B" : "#FDBCB4"} />
       </mesh>
