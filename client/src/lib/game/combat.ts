@@ -71,17 +71,18 @@ export function calculateDamage(
   attackType: AttackType,
   attackerStats: FighterStats,
   defenderStats?: FighterStats,
-  comboMultiplier: number = 1
+  comboMultiplier: number = 1,
+  accessoryPower: number = 0
 ): number {
   const baseAttack = attacks[attackType] || attacks.punchHigh;
   
   // Base damage calculation
   let damage = baseAttack.damage;
   
-  // Apply power multiplier
-  const powerMultiplier = 0.5 + (attackerStats.power / 20);
+
+  // Apply power multiplier, including accessory power
+  const powerMultiplier = 0.5 + ((attackerStats.power + accessoryPower) / 20);
   damage *= powerMultiplier;
-  
   // Apply defender's defense if provided
   if (defenderStats) {
     const defenseReduction = defenderStats.defense / 20;

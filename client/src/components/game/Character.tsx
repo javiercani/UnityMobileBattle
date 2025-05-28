@@ -1,8 +1,9 @@
 import { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useTexture } from "@react-three/drei";
+import { useTexture, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useFighting } from "../../lib/stores/useFighting";
+import { FighterData, accessories } from "../../lib/game/fighters";
 
 interface CharacterProps {
   playerId: 1 | 2;
@@ -16,6 +17,8 @@ export default function Character({ playerId, position, color }: CharacterProps)
   const meshRef = useRef<THREE.Group>(null);
   const leftArmRef = useRef<THREE.Mesh>(null);
   const rightArmRef = useRef<THREE.Mesh>(null);
+  const leftHandRef = useRef<THREE.Mesh>(null);
+  const rightHandRef = useRef<THREE.Mesh>(null);
   const leftLegRef = useRef<THREE.Mesh>(null);
   const rightLegRef = useRef<THREE.Mesh>(null);
   const { fighters, hitEffects } = useFighting();
@@ -394,6 +397,36 @@ export default function Character({ playerId, position, color }: CharacterProps)
           color={hitEffect.active ? "#FF6B6B" : "white"}
         />
       </mesh>
+
+      {/* Hands with skin texture - using sphereGeometry */}
+      <mesh ref={leftHandRef} castShadow position={[-0.75, 1.4, 0.15]} rotation={[0, 0, 0]}>
+        <sphereGeometry args={[0.15]} />
+        <meshStandardMaterial
+          map={textures.skin}
+          color={hitEffect.active ? "#FF6B6B" : "white"}
+        />
+      </mesh>
+
+      <mesh ref={rightHandRef} castShadow position={[0.75, 1.4, 0.15]} rotation={[0, 0, 0]}>
+        <sphereGeometry args={[0.15]} />
+        <meshStandardMaterial
+          map={textures.skin}
+          color={hitEffect.active ? "#FF6B6B" : "white"}
+        />
+      </mesh>
+
+      {/* Accessory */}
+      {fighter.accessory && (
+        <mesh castShadow position={[0.9, 1.7, 0.3]} rotation={[0, 0, 0]} >
+          <sphereGeometry args={[0.15]} />
+          <meshStandardMaterial color="gray" />
+          <Html>
+            <div style={{ color: 'black', fontSize: '0.6em' }}>
+              {accessories[fighter.accessory].name}
+            </div>
+          </Html>
+        </mesh>
+      )}
       
       {/* Legs with pants texture - using cylinderGeometry */}
       <mesh ref={leftLegRef} castShadow position={[-0.25, -0.2, 0]} rotation={[0, 0, 0]}>
@@ -411,6 +444,14 @@ export default function Character({ playerId, position, color }: CharacterProps)
           color={hitEffect.active ? "#FF6B6B" : "white"}
         />
       </mesh>
+
+      {/* Accessory */}
+      {fighter.accessory && (
+        <mesh castShadow position={[0.9, 1.7, 0.3]} rotation={[0, 0, 0]}>
+          <sphereGeometry args={[0.15]} />
+          <meshStandardMaterial color="gray" />
+        </mesh>
+      )}
       
       {/* Belt with texture - using torusGeometry */}
       <mesh castShadow position={[0, 0.4, 0]} rotation={[Math.PI / 2, 0, 0]}>

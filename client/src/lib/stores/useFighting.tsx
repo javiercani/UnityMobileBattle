@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
-import { fighters as fighterData } from "../game/fighters";
+import { fighters as fighterData, accessories } from "../game/fighters";
 import { calculateDamage, AttackType } from "../game/combat";
 
 export type GamePhase = "menu" | "character_selection" | "fighting" | "round_end" | "match_end";
@@ -16,6 +16,7 @@ interface Fighter {
   isMoving: boolean;
   lastAttackTime: number;
   combo: number;
+  accessory?: string;
 }
 
 interface HitEffect {
@@ -73,7 +74,8 @@ export const useFighting = create<FightingState>()(
             isAttacking: false,
             isMoving: false,
             lastAttackTime: 0,
-            combo: 0
+            combo: 0,
+            accessory: fighter1Data.accessory ? fighter1Data.accessory : undefined
           },
           2: {
             id: 2,
@@ -85,7 +87,8 @@ export const useFighting = create<FightingState>()(
             isAttacking: false,
             isMoving: false,
             lastAttackTime: 0,
-            combo: 0
+            combo: 0,
+            accessory: fighter2Data.accessory ? fighter2Data.accessory : undefined
           }
         },
         hitEffects: {
@@ -180,7 +183,8 @@ export const useFighting = create<FightingState>()(
 
       if (distance < 2.5) {
         const attackerData = fighterData[attacker.characterId];
-        const damage = calculateDamage('punch' as AttackType, attackerData.stats);
+        const accessoryPower = attacker.accessory ? accessories[attacker.accessory].power : 0;
+        const damage = calculateDamage('punch' as AttackType, attackerData.stats, undefined, undefined, accessoryPower);
         
         const newEnergy = Math.max(0, defender.energy - damage);
         const newCombo = attacker.combo + 1;

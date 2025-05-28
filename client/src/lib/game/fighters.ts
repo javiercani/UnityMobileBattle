@@ -12,6 +12,7 @@ export interface FighterData {
   color: string;
   stats: FighterStats;
   specialMoves: string[];
+  accessory?: string;
 }
 
 export const fighters: Record<string, FighterData> = {
@@ -26,7 +27,8 @@ export const fighters: Record<string, FighterData> = {
       defense: 7,
       energy: 100
     },
-    specialMoves: ["Pizza Slice", "Dough Spin", "Marinara Splash"]
+    specialMoves: ["Pizza Slice", "Dough Spin", "Marinara Splash"],
+    accessory: "rollingPin"
   },
   
   sofia: {
@@ -40,7 +42,8 @@ export const fighters: Record<string, FighterData> = {
       defense: 6,
       energy: 100
     },
-    specialMoves: ["Ice Cream Freeze", "Gelato Whip", "Vanilla Strike"]
+    specialMoves: ["Ice Cream Freeze", "Gelato Whip", "Vanilla Strike"],
+    accessory: "iceCreamScoop"
   },
   
   marco: {
@@ -54,7 +57,8 @@ export const fighters: Record<string, FighterData> = {
       defense: 6,
       energy: 100
     },
-    specialMoves: ["Caffeine Rush", "Steam Shot", "Crema Blast"]
+    specialMoves: ["Caffeine Rush", "Steam Shot", "Crema Blast"],
+    accessory: "coffeeGrinder"
   },
   
   lucia: {
@@ -68,7 +72,8 @@ export const fighters: Record<string, FighterData> = {
       defense: 8,
       energy: 100
     },
-    specialMoves: ["Spaghetti Whip", "Linguine Lasso", "Carbonara Bomb"]
+    specialMoves: ["Spaghetti Whip", "Linguine Lasso", "Carbonara Bomb"],
+    accessory: "ladle"
   },
   
   antonio: {
@@ -82,7 +87,8 @@ export const fighters: Record<string, FighterData> = {
       defense: 9,
       energy: 100
     },
-    specialMoves: ["Oar Slam", "Venetian Rush", "Canal Splash"]
+    specialMoves: ["Oar Slam", "Venetian Rush", "Canal Splash"],
+    accessory: "gondolaPaddle"
   },
   
   francesca: {
@@ -96,10 +102,42 @@ export const fighters: Record<string, FighterData> = {
       defense: 5,
       energy: 100
     },
-    specialMoves: ["Sonic Aria", "High Note", "Drama Strike"]
+    specialMoves: ["Sonic Aria", "High Note", "Drama Strike"],
+    accessory: "microphone"
   }
 };
 
+export interface AccessoryData {
+  name: string;
+  power: number;
+}
+
+export const accessories: Record<string, AccessoryData> = {
+  rollingPin: {
+    name: "Rolling Pin",
+    power: 2
+  },
+  iceCreamScoop: {
+    name: "Ice Cream Scoop",
+    power: 1
+  },
+  coffeeGrinder: {
+    name: "Coffee Grinder",
+    power: 3
+  },
+  ladle: {
+    name: "Ladle",
+    power: 2
+  },
+  gondolaPaddle: {
+    name: "Gondola Paddle",
+    power: 4
+  },
+  microphone: {
+    name: "Microphone",
+    power: 2
+  }
+};
 // Helper function to get random fighter
 export function getRandomFighter(): string {
   const fighterIds = Object.keys(fighters);
